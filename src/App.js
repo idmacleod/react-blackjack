@@ -10,6 +10,12 @@ class App extends React.Component {
       player2: null,
       game: null
     }
+
+    this.handleStartGame = this.handleStartGame.bind(this);
+  }
+
+  handleStartGame(newGame) {
+    this.setState({game: newGame});
   }
 
   render() {
@@ -18,8 +24,8 @@ class App extends React.Component {
         <header className="App-header">
           <h1>React Blackjack</h1>
         </header>
-        <GameForm />
-        <GameDisplay />
+        <GameForm onStartGame={this.handleStartGame} />
+        <GameDisplay game={this.state.game} />
       </div>
     );
   }
