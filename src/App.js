@@ -7,8 +7,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      player1: null,
-      player2: null,
       game: null
     }
 
@@ -26,8 +24,8 @@ class App extends React.Component {
         <header className="App-header">
           <h1>React Blackjack</h1>
         </header>
-        <GameForm onStartGame={this.handleStartGame} />
-        <GameDisplay game={this.state.game} />
+        {!this.state.game && <GameForm onStartGame={this.handleStartGame} />}
+        {this.state.game && <GameDisplay game={this.state.game} />}
       </div>
     );
   }
