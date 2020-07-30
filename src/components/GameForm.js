@@ -1,4 +1,5 @@
 import React from 'react';
+import Player from '../models/player';
 
 class GameForm extends React.Component {
     constructor(props) {
@@ -10,6 +11,7 @@ class GameForm extends React.Component {
 
         this.handleName1Input = this.handleName1Input.bind(this);
         this.handleName2Input = this.handleName2Input.bind(this);
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
     }
 
     handleName1Input(e) {
@@ -20,14 +22,21 @@ class GameForm extends React.Component {
         this.setState({name2: e.target.value});
     }
 
+    handleFormSubmit(e) {
+        e.preventDefault();
+        const player1 = new Player(e.target.name1.value);
+        const player2 = new Player(e.target.name2.value);
+        this.props.onStartGame(player1, player2);
+    }
+
     render() {
         return (
             <div className="game-form">
-                <form>
-                    <label htmlFor="p1">Player 1:</label>
-                    <input type="text" name="p1" id="p1" onChange={this.handleName1Input} />
-                    <label htmlFor="p2">Player 2:</label>
-                    <input type="text" name="p2" id="p2" onChange={this.handleName2Input} />
+                <form onSubmit={this.handleFormSubmit}>
+                    <label htmlFor="name1">Player 1:</label>
+                    <input type="text" name="name1" id="name1" onChange={this.handleName1Input} />
+                    <label htmlFor="name2">Player 2:</label>
+                    <input type="text" name="name2" id="name2" onChange={this.handleName2Input} />
                     <input type="submit" value="Start Game" />
                 </form>
             </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import GameForm from './components/GameForm';
 import GameDisplay from './containers/GameDisplay';
+import Game from './models/game';
 
 class App extends React.Component {
   constructor(props) {
@@ -14,7 +15,8 @@ class App extends React.Component {
     this.handleStartGame = this.handleStartGame.bind(this);
   }
 
-  handleStartGame(newGame) {
+  handleStartGame(player1, player2) {
+    const newGame = new Game(player1, player2)
     this.setState({game: newGame});
   }
 
